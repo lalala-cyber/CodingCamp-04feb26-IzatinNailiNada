@@ -525,6 +525,17 @@ li span {
     width: 100%;
   }
 
+  #dateInput {
+    display: block;
+  }
+
+  input[type="date"] {
+    min-height: 44px;
+    line-height: 1.2;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
   .time-range {
     flex-wrap: wrap;
   }
