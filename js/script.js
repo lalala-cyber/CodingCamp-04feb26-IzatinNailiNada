@@ -39,8 +39,8 @@ list.addEventListener("click", handleListClick);
 list.addEventListener("change", handleListChange);
 dateInput.addEventListener("input", syncMobilePlaceholders);
 dateInput.addEventListener("change", syncMobilePlaceholders);
-timeStartInput.addEventListener("input", syncMobilePlaceholders);
-timeStartInput.addEventListener("change", syncMobilePlaceholders);
+timeStartInput.addEventListener("input", syncMobileHelpers);
+timeStartInput.addEventListener("change", syncMobileHelpers);
 timeEndInput.addEventListener("input", syncMobileHelpers);
 timeEndInput.addEventListener("change", syncMobileHelpers);
 mobileQuery.addEventListener("change", syncMobileHelpers);
@@ -200,7 +200,7 @@ async function handleListChange(e) {
 }
 
 async function renderTodos() {
-  const today = new Date().toISOString().split("T")[0];
+  const today = getTodayLocal();
   const query = searchInput.value.trim().toLowerCase();
   const mode = filter.value;
 
@@ -299,6 +299,14 @@ function escapeHtml(value) {
 function formatTimeRange(start, end) {
   if (!end) return `${start} s.d`;
   return `${start} - ${end}`;
+}
+
+function getTodayLocal() {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const day = String(now.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
 }
 
 function initCustomSelects() {
