@@ -195,6 +195,25 @@ select {
     box-shadow 0.15s ease;
 }
 
+.input-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.input-wrap input {
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.time-range .input-wrap {
+  flex: 1 1 120px;
+}
+
+.mobile-placeholder {
+  display: none;
+}
+
 .native-select {
   display: none;
 }
@@ -511,6 +530,49 @@ li span {
   #dateInput {
     width: 100%;
     min-width: 0;
+  }
+
+  .input-wrap .mobile-placeholder {
+    display: block;
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #777777;
+    font-size: 12px;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .input-wrap.has-value .mobile-placeholder,
+  .input-wrap:focus-within .mobile-placeholder {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .input-wrap:not(.has-value) input[type="time"] {
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .input-wrap:focus-within input[type="time"] {
+    color: var(--text);
+    -webkit-text-fill-color: var(--text);
+  }
+
+  .time-range {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
+  }
+
+  .time-range .input-wrap {
+    min-width: 0;
+  }
+
+  .time-sep {
+    justify-self: center;
+    padding: 0 2px;
   }
 
   li {

@@ -17,6 +17,8 @@ const doneCount = document.getElementById("doneCount");
 const intro = document.getElementById("intro");
 const app = document.getElementById("app");
 const enterBtn = document.getElementById("enterBtn");
+const timeSep = document.querySelector(".time-sep");
+const mobileQuery = window.matchMedia("(max-width: 640px)");
 
 let todos = loadTodos();
 const attachmentUrls = new Map();
@@ -35,8 +37,16 @@ filter.addEventListener("change", renderTodos);
 searchInput.addEventListener("input", renderTodos);
 list.addEventListener("click", handleListClick);
 list.addEventListener("change", handleListChange);
+dateInput.addEventListener("input", syncMobilePlaceholders);
+dateInput.addEventListener("change", syncMobilePlaceholders);
+timeStartInput.addEventListener("input", syncMobilePlaceholders);
+timeStartInput.addEventListener("change", syncMobilePlaceholders);
+timeEndInput.addEventListener("input", syncMobileHelpers);
+timeEndInput.addEventListener("change", syncMobileHelpers);
+mobileQuery.addEventListener("change", syncMobileHelpers);
 
 renderTodos();
+syncMobileHelpers();
 
 async function addTodo(e) {
   e.preventDefault();
@@ -93,6 +103,7 @@ async function addTodo(e) {
   timeEndInput.value = "";
   priorityInput.value = "medium";
   attachmentInput.value = "";
+  syncMobileHelpers();
 }
 
 async function handleListClick(e) {
@@ -339,6 +350,31 @@ function initCustomSelects() {
       });
     });
   });
+}
+
+function syncMobilePlaceholders() {
+  const wraps = document.querySelectorAll(".input-wrap");
+  wraps.forEach((wrap) => {
+    const input = wrap.querySelector("input");
+    if (!input) return;
+    wrap.classList.toggle("has-value", input.value !== "");
+  });
+}
+
+function syncTimeSeparator() {
+  if (!timeSep) return;
+  if (!mobileQuery.matches) {
+    timeSep.textContent = "-";
+    return;
+  }
+  const start = timeStartInput.value;
+  const end = timeEndInput.value;
+  timeSep.textContent = start && !end ? "s.d" : "-";
+}
+
+function syncMobileHelpers() {
+  syncMobilePlaceholders();
+  syncTimeSeparator();
 }
 
 function clearAttachmentUrls() {
