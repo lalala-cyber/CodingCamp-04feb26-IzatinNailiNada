@@ -488,8 +488,14 @@ li span {
 }
 
 @media (max-width: 640px) {
+  body {
+    padding: 24px 12px;
+    align-items: flex-start;
+  }
+
   .app {
     padding: 22px;
+    width: 100%;
   }
 
   form {
@@ -508,14 +514,39 @@ li span {
     width: 100%;
   }
 
-  li {
+  #dateInput,
+  .time-range,
+  #priorityInput,
+  #attachmentInput,
+  #searchInput,
+  #filter,
+  .controls .custom-select {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .time-range {
     flex-wrap: wrap;
-    align-items: flex-start;
+  }
+
+  .time-range input[type="time"] {
+    flex: 1 1 100%;
+  }
+
+  li {
+    grid-template-columns: 24px 1fr;
+    align-items: start;
   }
 
   .actions {
     width: 100%;
     justify-content: flex-end;
+    grid-column: 1 / -1;
+  }
+
+  li .attachment img {
+    width: 100%;
+    height: auto;
   }
 }
 
