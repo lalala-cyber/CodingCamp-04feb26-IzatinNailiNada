@@ -508,6 +508,26 @@ li span {
     width: 100%;
   }
 
+  #dateInput,
+  .time-range {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .time-range {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .time-sep {
+    display: none;
+  }
+
+  .time-range input[type="time"] {
+    width: 100%;
+    flex: 1 1 auto;
+  }
+
   li {
     flex-wrap: wrap;
     align-items: flex-start;
